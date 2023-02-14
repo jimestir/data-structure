@@ -36,8 +36,6 @@ function calculate(operation) {
     if (OPERATORS[operation[i]]) {
       let application = eval(operation[i - 1], operation[i - 2], operation[i]);
       operation.splice(i - 2, 3, application);
-      console.log(operation.length, { i });
-      console.log(operation);
       i = operation.length > 3 ? 3 : 2;
     } else i++;
   } while (operation.length > 3);
@@ -68,7 +66,6 @@ function infixesToPostfixed(operation) {
 
   result.push(...operator.dataStore.reverse());
   return calculate(result.filter((e) => e !== undefined));
-  // return result.filter((e) => e !== undefined);
 }
 a = ["10+(1+2)*2", "10+(1+2-1)*2", "[1*(2-3)]+(4+5)"];
 console.log(infixesToPostfixed(a[1]));
