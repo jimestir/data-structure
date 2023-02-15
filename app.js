@@ -45,15 +45,21 @@ function calculate(operation) {
   return operation;
 }
 function infixesToPostfixed(operation) {
-  let arrNumOpe = operation.split(/[+(\)\-*]/).filter((e) => e !== "");
+  let arrNumOpe = operation.split(/[+\(\)\-*\[\]]/).filter((e) => e !== "");
   let arrOperating = operation.replace(/[0-9]/g, "").split("");
+  console.log({ arrNumOpe, arrOperating });
   let operator = new Stack();
   let result = [];
   let index = 0;
   let regroup = null;
+  let BRACKETS = {
+    ")": "(",
+    "]": "[",
+    "}": "}",
+  };
   for (let i = 0; i < arrOperating.length; i++) {
-    if (arrOperating[i] === ")") {
-      index = operator.dataStore.indexOf("(");
+    if (BRACKETS[arrOperating[i]]) {
+      index = operator.dataStore.indexOf(BRACKETS[arrOperating[i]]);
       regroup = operator.dataStore.splice(index + 1, operator.length());
       operator.dataStore.splice(index, 1);
       result.push(...regroup);
@@ -68,4 +74,4 @@ function infixesToPostfixed(operation) {
   return calculate(result.filter((e) => e !== undefined));
 }
 a = ["10+(1+2)*2", "10+(1+2-1)*2", "[1*(2-3)]+(4+5)"];
-console.log(infixesToPostfixed(a[1]));
+console.log(infixesToPostfixed(a[2]));
