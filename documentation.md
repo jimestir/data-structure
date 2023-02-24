@@ -943,5 +943,37 @@ console.log(infixesToPostfixed(a[2]));
 ### 3. Un ejemplo de una pila del mundo real es un dispensador de Pez. Imagina que tu dispensador virtual de Pez está lleno de colores rojo, amarillo y blanco y no te gustan los amarillos. Escribe un programa que use una pila (y tal vez más de una) para quitar los dulces amarillos sin cambiar el orden de los otros dulces en el dispensador
 
 ```js
+class Stack {
+  constructor() {
+    this.dataStore = [];
+  }
+  push = (e) => this.dataStore.push(e);
+  pop = () => this.dataStore.pop();
+}
 
+function filterDispenser(dispenser) {
+  let COLORS_DISPENSER = {
+    yellow: true,
+    // red: true,
+    // white: true,
+  };
+  let filterYellow = new Stack();
+  for (let i = 0; i < dispenser.length; i++) {
+    if (!COLORS_DISPENSER[dispenser[i]]) filterYellow.push(dispenser[i]);
+  }
+  return filterYellow.dataStore;
+}
+
+console.log(
+  filterDispenser([
+    "yellow",
+    "red",
+    "white",
+    "yellow",
+    "white",
+    "red",
+    "yellow",
+    "red",
+  ])
+);
 ```
