@@ -1,7 +1,7 @@
 const { List } = require("../../lib/List");
 var fs = require("fs");
 const dataMovies = fs
-  .readFileSync("./movies.txt", {
+  .readFileSync("exercise/list/movies.txt", {
     encoding: "utf8",
     flag: "r",
   })
