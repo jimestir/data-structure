@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/jimestir/data-structure#readme",
   "dependencies": {
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "prompt-sync": "^4.2.0"
   },
   "description": ""
 }

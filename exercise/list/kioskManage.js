@@ -16,6 +16,27 @@ class Customer {
   }
 }
 
+class IMPRINT {
+  availableMovies(moviesList) {
+    console.log("Available movies:");
+    moviesList.displayList();
+  }
+
+  customersRentals(customers) {
+    console.log("\nCustomer Rentals:");
+    customers.displayList();
+  }
+  availableMoviesNow(moviesList) {
+    console.log("\nMovies now Available:");
+    moviesList.displayList();
+  }
+
+  notAvailableMovies(rentedMoviesList) {
+    console.log("\nNot Available movies:");
+    rentedMoviesList.displayList();
+  }
+}
+
 function checkOut(name, movie, filmList, customerList, filmRentedList) {
   if (filmList.contains(movie)) {
     let c = new Customer(name, movie);
@@ -38,36 +59,17 @@ function devolution(filmList, filmRentedList) {
   }
 }
 
-function printAvailableMovies(moviesList) {
-  console.log("Available movies:");
-  moviesList.displayList();
-}
-
-function printCustomersRentals(customers) {
-  console.log("\nCustomer Rentals:");
-  customers.displayList();
-}
-
-function printAvailableMoviesNow(moviesList) {
-  console.log("\nMovies now Available:");
-  moviesList.displayList();
-}
-
-function printNotAvailableMovies(rentedMoviesList) {
-  console.log("\nNot Available movies:");
-  rentedMoviesList.displayList();
-}
-
 function kioskManage() {
   let moviesList = new List();
   let customers = new List();
   let rentedMoviesList = new List();
+  const PRI = new IMPRINT();
   for (let i = 0; i < dataMovies.length; i++) {
     moviesList.append(dataMovies[i]);
   }
   let follow = 1;
   while (follow) {
-    printAvailableMovies(moviesList);
+    PRI.availableMovies(moviesList);
 
     if (rentedMoviesList.length())
       console.log("Not Available movies:"), rentedMoviesList.displayList();
@@ -77,11 +79,11 @@ function kioskManage() {
 
     checkOut(name, movie, moviesList, customers, rentedMoviesList);
 
-    printCustomersRentals(customers);
+    PRI.customersRentals(customers);
 
-    printAvailableMoviesNow(moviesList);
+    PRI.availableMoviesNow(moviesList);
 
-    printNotAvailableMovies(rentedMoviesList);
+    PRI.notAvailableMovies(rentedMoviesList);
 
     let respDevolution = prompt(
       "Do you want to return a movie (1:Yes or 0:No): "
