@@ -977,3 +977,128 @@ console.log(
   ])
 );
 ```
+
+## Queue (Charter 5)
+
+### 1. Modifique la clase Queue para crear una clase Dequeue. Una dequeue es una estructura similar a una cola que permite agregar y eliminar elementos tanto del frente como del final de la lista. Pon a prueba tu clase en un programa
+
+```JS
+const { Queue } = require("../../lib/Queue");
+const fs = require("fs");
+const data = fs
+  .readFileSync("exercise/queue/dancers.txt", {
+    encoding: "utf-8",
+  })
+  .split("\r\n");
+
+class Dequeue extends Queue {
+  frontEnqueue(e) {
+    this.dataStore.unshift(e);
+  }
+  backDequeue() {
+    return this.dataStore.pop();
+  }
+}
+
+const dancers = new Dequeue();
+for (let i = 0; i < data.length; i++) {
+  if (i > 7) {
+    dancers.firstEnqueue(data[i]);
+  } else dancers.enqueue(data[i]);
+}
+console.log(dancers);
+dancers.lastDequeue();
+console.log(dancers);
+dancers.dequeue();
+console.log(dancers);
+```
+
+### 2. Use la clase Dequeue que creó en el ejemplo 5-1 para determinar si una palabra dada es una palindromo
+
+```JS
+const { Queue } = require("../../lib/Queue");
+
+const test = [
+  "A man, a plan, a canal. Panama",
+  "A man, a plan, a canal: Panama",
+  "rosa",
+];
+
+function isPalindrome(str) {
+  const r = /[\W]/g;
+  const lowRegStr = str.toLowerCase().replace(r, "");
+  const reversedArr = new Queue();
+  const rightArr = new Queue();
+
+  for (let i = 0; i < lowRegStr.length; i++) {
+    reversedArr.frontEnqueue(lowRegStr[i]);
+    rightArr.enqueue(lowRegStr[i]);
+  }
+
+  return reversedArr.dataStore.toString() === rightArr.dataStore.toString();
+}
+console.log(isPalindrome(test[2]));
+
+```
+
+### 3. Modifique el ejemplo de ED (ejemplo 5-5) para que el usuario pueda controlar la actividad en el ED. Cree un sistema de menús que permita al usuario elegir entre las siguientes actividades:a. El paciente ingresa al servicio de urgencias, b. El médico ve al paciente, c. Mostrar lista de pacientes en espera de ser atendidos
+
+```JS
+const { PriorityQueue } = require("../../lib/PriorityQueue");
+const prompt = require("prompt-sync")();
+
+function hospitalEDSystem() {
+  let noExit = true;
+  const patients = new PriorityQueue();
+  const REQUEST = {
+    1: () => addPatient(patients),
+    2: () => nexPatient(patients),
+    3: () => currentPatient(patients),
+    4: () => (noExit = false),
+  };
+  while (noExit) {
+    let question = prompt(
+      "Choose a number for your operation " +
+        "\n" +
+        "1: Patient enters ED." +
+        "\n" +
+        "2: Patient is seen by doctor." +
+        "\n" +
+        "3: Display list of patient waiting to be seen." +
+        "\n" +
+        "4: Exit" +
+        "\n"
+    );
+    if (REQUEST[question]) REQUEST[question]();
+    else console.log("Your option is not valid. Try again");
+  }
+}
+
+function addPatient(patients) {
+  const name = prompt("Enter the name of the patient: ");
+  const code = prompt("Enter the patient's priority code: ");
+  patients.enqueue({
+    name: name,
+    code: code,
+  });
+}
+
+function currentPatient(patients) {
+  if (patients.count() > 0)
+    console.log("Patients waiting to be seen:"),
+      console.log(patients.toStringPriority());
+  else console.log("there's no patients to be seen");
+}
+
+function nexPatient(patients) {
+  if (patients.count() > 0) {
+    let seen = patients.dequeueWithPriority();
+    console.log("Patient being treated: " + seen[0].name);
+  } else console.log("There's no patient being treated");
+}
+
+hospitalEDSystem();
+
+```
+
+## Linked List (Charter 6)
