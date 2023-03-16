@@ -1,5 +1,13 @@
 # Data Structure & Algoritthms with JavaScript
 
+| Index     | Title                                                                 |
+| --------- | --------------------------------------------------------------------- |
+| Charter 2 | [Array](#two-dimensional-and-multidimensional-arrays-chapter-2-array) |
+| Charter 3 | [List A List ADT](#list-a-list-adt-chapter-3)                         |
+| Charter 4 | [Stack](#stack-charter-4)                                             |
+| Charter 5 | [Queue](#queue-charter-5)                                             |
+| Charter 6 | [Linked List](#linked-list-charter-6)                                 |
+
 ## Two-Dimensional and Multidimensional Arrays (Chapter 2 Array)
 
 ### 1. Cree un objeto de calificaciones que almacene un conjunto de calificaciones de estudiantes en un objeto. Proporcione
