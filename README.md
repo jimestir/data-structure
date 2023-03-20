@@ -1143,6 +1143,20 @@ class LList {
       currNode = currNode.next;
     }
   }
+
+  
+  findPrevious(item) {
+    let currNode = this.head;
+    while (currNode.next !== null && currNode.next.element !== item) {
+      currNode = currNode.next;
+    }
+    return currNode;
+  }
+
+  remove(item) {
+    let prevNode = this.findPrevious(item);
+    if (prevNode.next !== null) prevNode.next = prevNode.next.next;
+  }
 }
 
 // main program
