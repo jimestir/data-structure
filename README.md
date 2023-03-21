@@ -7,6 +7,7 @@
 | Charter 4 | [Stack](#stack-charter-4)                                             |
 | Charter 5 | [Queue](#queue-charter-5)                                             |
 | Charter 6 | [Linked List](#linked-list-charter-6)                                 |
+| Charter 7 | [Doubly Linked List](#doubly-linked-list-charter-7)                   |
 
 ## Two-Dimensional and Multidimensional Arrays (Chapter 2 Array)
 
@@ -1144,7 +1145,6 @@ class LList {
     }
   }
 
-  
   findPrevious(item) {
     let currNode = this.head;
     while (currNode.next !== null && currNode.next.element !== item) {
@@ -1166,4 +1166,80 @@ cities.insert("conway", "head");
 cities.insert("russellville", "conway");
 cities.insert("alma", "russellville");
 cities.display();
+```
+
+## Doubly Linked List (charter 7)
+
+```JS
+class Node {
+  constructor(element) {
+    this.element = element;
+    this.next = null;
+    this.previous = null;
+  }
+}
+class DoublyLinkedList {
+  constructor() {
+    this.head = new Node("head");
+  }
+
+  find(item) {
+    let currNode = this.head;
+    while (currNode.element !== item) currNode = currNode.next;
+    return currNode;
+  }
+
+  insert(newElement, item) {
+    let newNode = new Node(newElement);
+    let current = this.find(item);
+    newNode.next = current.next;
+    newNode.previous = current;
+    current.next = newNode;
+  }
+
+  remove(item) {
+    let currNode = this.find(item);
+    if (currNode.next !== null) {
+      currNode.previous.next = currNode.next;
+      currNode.next.previous = currNode.previous;
+      currNode.next = null;
+      currNode.previous = null;
+    }
+  }
+
+  findLast() {
+    let currNode = this.head;
+    while (currNode.next !== null) currNode = currNode.next;
+    return currNode;
+  }
+
+  dispReverse() {
+    let currNode = this.head;
+    currNode = this.findLast();
+    while (currNode.previous !== null) {
+      console.log(currNode.element);
+      currNode = currNode.previous;
+    }
+  }
+
+  display() {
+    let currNode = this.head;
+    while (currNode.next !== null) {
+      console.log(currNode.next.element);
+      currNode = currNode.next;
+    }
+  }
+}
+
+let cities = new DoublyLinkedList();
+cities.insert("conway", "head");
+cities.insert("russellville", "conway");
+cities.insert("carlisle", "russellville");
+cities.insert("alma", "carlisle");
+cities.display();
+console.log();
+cities.remove("carlisle");
+cities.display();
+console.log();
+cities.dispReverse();
 ```
