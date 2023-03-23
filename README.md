@@ -7,7 +7,8 @@
 | Charter 4 | [Stack](#stack-charter-4)                                             |
 | Charter 5 | [Queue](#queue-charter-5)                                             |
 | Charter 6 | [Linked List](#linked-list-charter-6)                                 |
-| Charter 7 | [Doubly Linked List](#doubly-linked-list-charter-7)                   |
+| Charter 6 | [Doubly Linked List](#doubly-linked-list)                             |
+| Charter 6 | [Circularly Linked List](#circularly-linked-list)                     |
 
 ## Two-Dimensional and Multidimensional Arrays (Chapter 2 Array)
 
@@ -1168,7 +1169,7 @@ cities.insert("alma", "russellville");
 cities.display();
 ```
 
-## Doubly Linked List (charter 7)
+## Doubly Linked List
 
 ```JS
 class Node {
@@ -1243,3 +1244,66 @@ cities.display();
 console.log();
 cities.dispReverse();
 ```
+
+## Circularly Linked List
+
+```JS
+class Node {
+  constructor() {
+    this.element = this.element;
+    // this.next = null  'not necessary'
+  }
+}
+class CircularlyLinkedList {
+  constructor() {
+    this.head = new Node("head");
+    this.head.next = this.head;
+  }
+
+  find(item) {
+    let currNode = this.head;
+    while (currNode.element !== item) currNode = currNode.next;
+    return currNode;
+  }
+
+  insert(newElement, item) {
+    let newNode = new Node(newElement);
+    let current = this.find(item);
+    newNode.next = current.next;
+    current.next = newNode;
+  }
+
+  display() {
+    let currNode = this.head;
+    while (currNode.next !== null && currNode.next.element !== "head") {
+      console.log(currNode.next.element);
+      currNode = currNode.next;
+    }
+  }
+
+  findPrevious(item) {
+    let currNode = this.head;
+    while (currNode.next !== null && currNode.next.element !== item) {
+      currNode = currNode.next;
+    }
+    return currNode;
+  }
+
+  remove(item) {
+    let prevNode = this.findPrevious(item);
+    if (prevNode.next !== null) prevNode.next = prevNode.next.next;
+  }
+}
+```
+
+### 1. Implementar la función de avance (n) para que cuando se ejecute, el nodo actual sea moviodo a _n_ nodos hacia adelante en la lista
+
+### 2. Implemente la función _back(n)_ para que cuando se ejecute, el nodo actual se mueva _n_ espacios hacia atrás en la lista
+
+### 3. Implementa la función _show()_, que muesta los datos asociados con el actual nodo
+
+## 4. Escriba un progra que utilice una lista de enlaces simples para realizar un seguimiento de un conjunto de calificaciones de prueba ingresadas de forma interactiva en el programa
+
+## 5. Reescribe tu solución al _ejemplo 6-4_ usando una lista doblemente enlazada
+
+## 6. Según la lenyenda, el historiador judío de primer siglo, Flavio Josefo, estuvo a punto de ser capturado junto con una banda de 4- compatriotas por soldados romanos durante la guerra judeo-romana. Los soldados judios decidieron que preferian suicidarse a ser capturados e idearon un plan para su desaparición. Debían formar un círculo y matar a uno de cada tres soldados hasta que estuvieran todos muertos. Josephus y uno más decidieron que no querían saber nada de esto y rápidamente calcularon dónde debían ubicarse para ser los últimos sobrevivientes. Escriba un programa que le permita conolocar a _n_ personas en un circulo y especifique que cada _m-ésima_ persona será asesinada. El programa debe determinar el número de las dos ultimas personas que quedan en el circulo. Usa una lista enlazada circularmente para resolver el problema
