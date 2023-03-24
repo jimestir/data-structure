@@ -1249,9 +1249,9 @@ cities.dispReverse();
 
 ```JS
 class Node {
-  constructor() {
-    this.element = this.element;
-    // this.next = null  'not necessary'
+  constructor(element) {
+    this.element = element;
+    this.next = null 
   }
 }
 class CircularlyLinkedList {
