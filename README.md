@@ -1298,12 +1298,28 @@ class CircularlyLinkedList {
 
 ### 1. Implementar la función de avance (n) para que cuando se ejecute, el nodo actual sea moviodo a _n_ nodos hacia adelante en la lista
 
+````JS
+// Para incorporarlo al method
+    advance(n, item) {
+    let currNode = this.find(item);
+    let count = 0;
+    while (currNode.next !== null && count < n) {
+      currNode = currNode.next;
+      count++;
+    }
+    return count < n
+      ? `Exceeds the traversal of the linked list, this is the last value of the list: ${currNode.element}`
+      : currNode.element;
+  }
+```
+
 ### 2. Implemente la función _back(n)_ para que cuando se ejecute, el nodo actual se mueva _n_ espacios hacia atrás en la lista
 
 ### 3. Implementa la función _show()_, que muesta los datos asociados con el actual nodo
 
-## 4. Escriba un progra que utilice una lista de enlaces simples para realizar un seguimiento de un conjunto de calificaciones de prueba ingresadas de forma interactiva en el programa
+## 4. Escriba un programa que utilice una lista de enlaces simples para realizar un seguimiento de un conjunto de calificaciones de prueba ingresadas de forma interactiva en el programa
 
 ## 5. Reescribe tu solución al _ejemplo 6-4_ usando una lista doblemente enlazada
 
 ## 6. Según la lenyenda, el historiador judío de primer siglo, Flavio Josefo, estuvo a punto de ser capturado junto con una banda de 4- compatriotas por soldados romanos durante la guerra judeo-romana. Los soldados judios decidieron que preferian suicidarse a ser capturados e idearon un plan para su desaparición. Debían formar un círculo y matar a uno de cada tres soldados hasta que estuvieran todos muertos. Josephus y uno más decidieron que no querían saber nada de esto y rápidamente calcularon dónde debían ubicarse para ser los últimos sobrevivientes. Escriba un programa que le permita conolocar a _n_ personas en un circulo y especifique que cada _m-ésima_ persona será asesinada. El programa debe determinar el número de las dos ultimas personas que quedan en el circulo. Usa una lista enlazada circularmente para resolver el problema
+````
